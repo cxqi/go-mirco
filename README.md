@@ -40,41 +40,39 @@ We then create a mirco-me folder under $GOPATH/src/demo to create the server and
 
 ```
    package main
-import (
-"context"
-"fmt"
+   import (
+       "context"
+       "fmt"
 
-micro "github.com/micro/go-micro"
-proto "../proto"
+       micro "github.com/micro/go-micro"
+       proto "../proto"
 
-)
+    )
 
-type Greeter struct{}
+     type Greeter struct{}
 
-func (g *Greeter) Hello(ctx context.Context, req *proto.HelloRequest, rsp *proto.HelloResponse) error {
-rsp.Greeting = "Hello " + req.Name
-return nil
-}
+     func (g *Greeter) Hello(ctx context.Context, req *proto.HelloRequest, rsp *proto.HelloResponse) error {
+            rsp.Greeting = "Hello " + req.Name
+            return nil
+     }
 
-func main() {
-// Create a new service. Optionally include some options here.
-service := micro.NewService(
-micro.Name("greeter"),
-)
+     func main() {
+          // Create a new service. Optionally include some options here.
+          service := micro.NewService(
+               micro.Name("greeter"),
+          )
 
-// Init will parse the command line flags.
-service.Init()
+          // Init will parse the command line flags.
+          service.Init()
 
-// Register handler
-proto.RegisterGreeterHandler(service.Server(), new(Greeter))
+         // Register handler
+         proto.RegisterGreeterHandler(service.Server(), new(Greeter))
 
-// Run the server
-if err := service.Run(); err != nil {
-    fmt.Println(err)
-}
-
-
-}
+         // Run the server
+         if err := service.Run(); err != nil {
+             fmt.Println(err)
+         }
+    }
 
 ```
 
@@ -83,35 +81,33 @@ if err := service.Run(); err != nil {
 ```
     package main
 
-import (
-"context"
-"fmt"
+    import (
+        "context"
+        "fmt"
 
-micro "github.com/micro/go-micro"
-proto "../proto"
+        micro "github.com/micro/go-micro"
+        proto "../proto"
 
-
-)
-
-func main() {
-// Create a new service. Optionally include some options here.
-service := micro.NewService(micro.Name("greeter.client"))
-service.Init()
-
-// Create new greeter client
-greeter := proto.NewGreeterService("greeter", service.Client())
-
-// Call the greeter
-rsp, err := greeter.Hello(context.TODO(), &proto.HelloRequest{Name: "John"})
-if err != nil {
-    fmt.Println(err)
-}
-
-// Print response
-fmt.Println(rsp.Greeting)
+   )
 
 
-}
+      func main() {
+          // Create a new service. Optionally include some options here.
+          service := micro.NewService(micro.Name("greeter.client"))
+          service.Init()
+
+          // Create new greeter client
+          greeter := proto.NewGreeterService("greeter", service.Client())
+
+          // Call the greeter
+          rsp, err := greeter.Hello(context.TODO(), &proto.HelloRequest{Name: "John"})
+          if err != nil {
+             fmt.Println(err)
+          }
+
+          // Print response
+          fmt.Println(rsp.Greeting)
+    }
 
 ```
 
