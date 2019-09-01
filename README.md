@@ -15,10 +15,12 @@
 > * [protoc-gen-go](https://github.com/golang/protobuf)
 
 ### achieve
+---
 
 We then create a mirco-me folder under $GOPATH/src/demo to create the server and client and protos folders. Create server_main.go in the server folder and create client_main.go and protos folders in the client folder. Create a hello.proto file
 
 #### add the following to the protos/hello.proto file
+----
 
 ```
    syntax = "proto3";
@@ -36,10 +38,11 @@ We then create a mirco-me folder under $GOPATH/src/demo to create the server and
    }
 
 ```
+
 #### add the following to /server/server_main.go
+---
 
 ```
-   package main
    import (
        "context"
        "fmt"
@@ -77,9 +80,10 @@ We then create a mirco-me folder under $GOPATH/src/demo to create the server and
 ```
 
 #### add the following to client/client_main.go
+---
 
 ```
-    package main
+  
 
     import (
         "context"
@@ -111,7 +115,8 @@ We then create a mirco-me folder under $GOPATH/src/demo to create the server and
 
 ```
 
-Open the terminal and switch to the protos folder and execute the following command.
+#### Open the terminal and switch to the protos folder and execute the following command.
+---
 
 ```
   protoc --proto_path=. --micro_out=. --go_out=. hello.proto
