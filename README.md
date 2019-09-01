@@ -4,9 +4,9 @@
 
 （1）First install the protocol tool
     
-    ```
-       go get github.com/micro/protoc-gen-micro
-    ```
+```
+  go get github.com/micro/protoc-gen-micro
+```
 
  (2) Two tools that must be installed
      
